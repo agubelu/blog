@@ -1,0 +1,195 @@
+:root {
+    /* Light theme colors */
+    --toggle-size: 2rem;
+    --background-color: hsl(240, 6%, 90%);
+    --project-bg: hsl(240, 6%, 93%);
+    --picture-bg: hsl(240, 6%, 92%);
+    --border-color: hsl(0, 0%, 80%);
+    --text: #222;
+    --header-buttons: #292929; /* De-saturate the buttons a little bit to visually match the text */
+    --link: #0056b3;
+}
+
+[data-theme="dark"] {
+    /* Dark theme colors */
+    --background-color: #222;
+    --project-bg: #333;
+    --picture-bg: #2e2e2e;
+    --border-color: hsl(0, 0%, 30%);
+    --text: rgb(225, 225, 230);
+    --header-buttons: rgb(205, 205, 210);
+    --link: #81bcfc;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Blog styles */
+
+#entries {
+    text-align: left;
+    width: 80%;
+}
+
+.entry-date {
+    font-size: smaller;
+    font-style: italic;
+}
+
+/* -------------------------------------------------------------------------- */
+/* General styles */
+
+@media screen and (max-width: 500px) {
+    :root {
+        --toggle-size: 1.5rem;
+    }
+}
+
+#content {
+    display: flex;
+    text-align: center;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    padding-top: 1rem;
+}
+
+html {
+    background-color: var(--background-color);
+    color: var(--text);
+}
+
+a {
+    color: var(--link) !important;
+}
+
+hr {
+    border-top: 2px solid var(--border-color);
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    padding: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Header styles */
+
+#profile {
+    width: 30%;
+    margin-left: 2rem;
+}
+
+#bio p {
+    margin-top: 0;
+}
+
+#picture {
+    max-height: 150px;
+    width: auto;
+    border-radius: 50%;
+    border: 3px solid var(--border-color);
+    background-color: var(--picture-bg);
+}
+
+#name {
+    margin-top: 0;
+}
+
+#links {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    font-size: 300%;
+}
+
+#links a {
+    color: var(--header-buttons) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsiveness */
+
+/* Collapse bio under entries */
+@media screen and (max-width: 1200px) {
+    #content {
+        display: block;
+    }
+
+    #entries {
+        width: 100%;
+    }
+
+    #profile {
+        margin-left: 0;
+        padding-left: 0;
+        width: 100%;
+        margin-top: 1rem;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    #profile-text {
+        margin-left: 1rem;
+    }
+
+    #profile .sticky {
+        display: flex;
+    }
+
+    .sticky {
+        position: inherit;
+        padding-top: 0;
+    }
+}
+
+/* Make bio smaller for phones */
+@media screen and (max-width: 600px) {
+    #profile-text {
+        margin-left: 0;
+    }
+
+    #name {
+        font-size: 200%;
+    }
+
+    #profile, #profile .sticky {
+        display: block;
+        margin-left: 0;
+    }
+
+    #picture {
+        max-height: 100px;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Theme toggle styles */
+
+#dark-mode-toggle {
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    width: var(--toggle-size);
+    height: var(--toggle-size);
+    box-shadow: inset calc(var(--toggle-size) * 0.33) calc(var(--toggle-size) * -0.25) 0;
+    border-radius: 999px;
+    color: var(--text);
+    transition: all 500ms;
+    opacity: 1 !important;
+}
+
+#dark-mode-toggle:checked {
+    --ray-size: calc(var(--toggle-size) * -0.4);
+    --offset-orthogonal: calc(var(--toggle-size) * 0.65);
+    --offset-diagonal: calc(var(--toggle-size) * 0.45);
+    transform: scale(0.75);
+    color: rgb(255, 132, 0);
+    box-shadow: inset 0 0 0 var(--toggle-size), calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size), var(--offset-orthogonal) 0 0 var(--ray-size), 0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size), 0 var(--offset-orthogonal) 0 var(--ray-size), calc(var(--offset-diagonal) * -1) calc(var(--offset-diagonal) * -1) 0 var(--ray-size), var(--offset-diagonal) var(--offset-diagonal) 0 var(--ray-size), calc(var(--offset-diagonal) * -1) var(--offset-diagonal) 0 var(--ray-size), var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
+}
+
+#dark-mode-container {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}

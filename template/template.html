@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{title}</title>
+
+    <meta charset="utf-8">
+    <meta property="og:site_name" content="Agustín Borrego's blog" vmid="og:site_name">
+    <meta name="apple-mobile-web-app-title" content="{title}">
+    <meta property="og:title" content="{title}" vmid="og:title">
+    <meta property="og:description" content="{preview}" vmid="og:description">
+    <meta data-hid="description" name="description" content="{preview}">
+    <meta property="og:locale" content="en_EN" vmid="og:locale">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/template.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/fa.min.css">
+
+    <script src="/js/darkmode.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RVECNQ3PH1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {{ dataLayer.push(arguments); }}
+        gtag("js", new Date());
+        gtag("config", "G-RVECNQ3PH1");
+    </script>
+</head>
+
+<body>
+    <label id="dark-mode-container">
+        <input id="dark-mode-toggle" type="checkbox">
+        <span></span>
+    </label>
+
+    <div id="content">
+        <div id="entries">
+
+            {back_home}
+
+            {entry_content}
+        </div>
+
+
+        <div id="profile">
+            <div class="sticky">
+                <img src="/img/agu.png" id="picture">
+
+                <div id="profile-text">
+                    <h1 id="name">Agustín Borrego</h1>
+                    
+                    <span id="bio">
+                        <p>Hi! I'm a software engineer from Spain.</p>
+                        <p>Currently, Data Engineer @ <a href="https://mixrank.com">MixRank</a>.</p>
+                    </span>
+                    
+                    <div id="links">
+                        <a rel="noreferrer" href="/rss.xml" aria-label="Link to the RSS feed for this blog">
+                            <i class="fa fa-rss-square" aria-hidden="true"></i>
+                        </a>
+                        
+                        <a rel="noreferrer" href="mailto:agu@borrego.dev" aria-label="Link to my email">
+                            <i class="fa fa-envelope-square" aria-hidden="true"></i>
+                        </a>
+                    
+                        <a rel="noreferrer" href="https://github.com/agubelu" aria-label="Link to my GitHub profile">
+                            <i class="fa fa-github-square" aria-hidden="true"></i>
+                        </a>
+                    
+                        <a rel="noreferrer" href="https://www.linkedin.com/in/agustin-borrego/?locale=en_US"
+                            aria-label="Link to my LinkedIn profile">
+                            <i class="fa fa-lnkdi-square" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div> 
+        </div> 
+
+    </div>
+</body>
+
+</html>
