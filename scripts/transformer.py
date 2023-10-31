@@ -13,7 +13,7 @@ def process_entry(entry: RawEntry) -> ProcessedEntry:
     title, content_raw = entry.content.split("---", maxsplit=1)
 
     # Transform the content into HTML
-    html_content = markdown.markdown(content_raw.strip())
+    html_content = markdown.markdown(content_raw.strip(), extensions=["fenced_code"])
 
     # Extract the preview, which is the content of the first <p>
     # in the processed HTML
