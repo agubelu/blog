@@ -12,7 +12,7 @@ def read_entries() -> List[RawEntry]:
 
     files = [f for f in os.listdir("entries") if f.endswith(".md")]
     raw_entries = [
-        RawEntry(filename=f, content=open("entries/" + f).read())
+        RawEntry(filename=f, content=open("entries/" + f, encoding="utf-8").read())
         for f in files
     ]
 

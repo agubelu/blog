@@ -56,7 +56,7 @@ code.hljs {
 }
 
 
-.hljs {
+.hljs, code {
     color: var(--codeColor);
     background: var(--codeBg);
 }
