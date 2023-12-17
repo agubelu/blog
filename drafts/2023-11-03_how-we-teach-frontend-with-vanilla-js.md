@@ -235,11 +235,11 @@ const photosValidator = {
         let title = formData.get("title");
         let url = formData.get("url");
 
-        if (title == null || title.length == 0) {
+        if (title === null || title.length === 0) {
             errors.push("The photo must have a title");
         }
 
-        if (url == null || !url.match(/^https?:/)) {
+        if (url === null || !url.match(/^https?:/)) {
             errors.push("The photo must have a valid image URL");
         }
 
@@ -251,5 +251,67 @@ export { photosValidator };
 ```
 
 This is a simple validation, but the idea is also simple. The goal is, again, to help them keep everything tidy and organized. From our experience, we've seen that this encourages students to write more complex and exhaustive validations. A common source of pain for them used to be implementing validations that involve API requests; after we started doing things this way, I saw many of my students turning their validation functions `async` and doing API requests inside them before I even got to teaching them that.
+
+## Bringing everything together
+
+By now, we have all the building blocks we need to build an actual page for our web app. All that remains is to orchestrate the specific logic for every individual page.
+
+To do this, we create a JS file for every HTML page in our application, with the same name. For example, let's build our `index.html`, in which we'll show a gallery with all of our pictures. The responsible for bringing this page to life (its _controller_, if you will) is `js/index.js`, which could look like this:
+
+```js
+import { photosAPI } from "/js/api/photos.js";
+import { photosValidator } from "/js/validators/photos.js";
+import { galleryRenderer } from "/js/renderers/gallery.js";
+
+function main() { 
+    loadGallery();
+}
+
+async function loadGallery() {
+    let photos = await photosAPI.getAll();
+    let gallery = galleryRenderer.asThumbnailGrid(photos);
+    let galleryContainer = document.getElementById("card-gallery");
+    galleryContainer.append(gallery);
+}
+
+document.addEventListener("DOMContentLoaded", main);
+```
+
+Creating and registering a `main()` function reduces friction with their pre-existing programming knowledge and, I think, helps students visualize the execution flow more clearly. At this point, the process of retrieving and displaying elements from the API becomes fairly streamlined: request the elements, renderize them, and place them in the appropriate container. Other elements can then be loaded in parallel thanks to the functions being `async`.
+
+Handling forms to create/edit elements
+
+```js
+import { photosAPI } from "/js/api/photos.js";
+import { alertRenderer } from "/js/renderers/alerts.js";
+
+function main() {
+    let photoForm = document.getElementById("form-photo-upload");
+    photoForm.onsubmit = handleSubmitPhoto;
+}
+
+function handlePhotoSubmit(event) {
+    event.preventDefault();
+
+    let formData = new FormData(event.target);
+    let errors = photosValidator.validateCreation(formData);
+    
+    let errorsDiv = document.getElementById("errors");
+    errorsDiv.innerHTML = "";
+    
+    if (errors.length === 0) {
+        await photosAPI.create(formData);
+        window.location.href = "index.html";
+    } else {
+        for (let errorMsg of errors) {
+            let error = alertRenderer.asError(errorMsg);
+            errorsDiv.append(error);
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", main);
+
+```
 
 ## Bonus: utility modules

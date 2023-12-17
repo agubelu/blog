@@ -36,4 +36,4 @@ def _transform_date(date: str) -> str:
     year, month, day = date.split("-")
     month_str = ["jan", "feb", "mar", "apr", "may", "jun", 
                  "jul", "aug", "sep", "oct", "nov", "dec"]
-    return f"{day}/{month_str[int(month) - 1]}/{year}"
+    return f"{day.lstrip('0')} {month_str[int(month) - 1]}. {year}"

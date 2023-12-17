@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 from scripts import transformer, reader, generator
 
@@ -12,7 +13,8 @@ os.mkdir("out/entries")
 shutil.copytree("entries/assets", "out/entries/assets")
 
 # Read and process the entries
-raw_entries = reader.read_entries()
+include_drafts = "--drafts" in sys.argv
+raw_entries = reader.read_entries(include_drafts)
 entries = list(map(transformer.process_entry, raw_entries))
 
 # Generate and write the index page
