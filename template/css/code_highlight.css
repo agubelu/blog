@@ -49,6 +49,7 @@ pre code.hljs {
     display: block;
     overflow-x: auto;
     padding: 1em;
+    line-height: 1.2rem;
 }
 
 code.hljs {
