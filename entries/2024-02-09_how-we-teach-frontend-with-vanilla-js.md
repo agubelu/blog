@@ -1,9 +1,11 @@
 How we teach front-end development using vanilla JS
 ---
 
+Or, a proposal on how to structure JS code for simple web apps.
+
 ## Some context
 
-During my time as a PhD student, I had to take on some teaching duties. I ended up teaching the two introductory courses to information systems, which essentially map to back-end and front-end development. They were both very fun and rewarding to teach, but also very important to get right, since the local market in Spain focuses very heavily on web development, so most of our students will work on a web information system as their first job after graduating.
+During my time as a PhD student, I had to take on some teaching duties. I ended up teaching the two introductory courses to information systems, which essentially map to back-end and front-end development. They were both very fun and rewarding to teach, but also very important to teach well since the local market in Spain focuses very heavily on web development, so most of our students will work on a web information system as their first job after graduating.
 
 At the time when I joined, they were undergoing some changes as they were pretty outdated. The back-end course focused mostly on introducing students to requirements, relational databases and SQL, which never go out of fashion. We added a few units introducing REST and we [built a tool](https://github.com/DEAL-US/Silence) to help them quickly deploy CRUD APIs on top of their existing databases. It resulted in a nicely cohesive course where students go through the whole process of turning requirements into a conceptual model, then into a relational model and a database, and finally building a REST back-end served by that database.
 
@@ -15,7 +17,7 @@ In true programmer fashion, we decided to discard all legacy materials and re-de
 
 - The resulting learning materials would become stale very quickly due to the fast-paced trends in the JS world, or simply due to framework updates.
 
-There was a problem, though. None of us had heard of, or could find, any remotely standardized way to organize vanilla JS for a web app, let alone one simple enough for second-year students who had just learned the basics of JS just a couple of weeks beforehand. But we really didn't want to repeat the same mistake of not giving students clear guidelines on how to structure their codebase, so we came up with a code structure for this particular purpose. 
+There was a problem, though. None of us had heard of, or could find, any remotely standardized way to organize vanilla JS for a web app, let alone one simple enough for second-year students who had just learned the basics of JS just a couple of weeks beforehand. But we really didn't want to repeat the same mistake of not giving students clear guidelines on how to structure their codebase, so we came up with a code structure for this particular purpose.
 
 This structure borrows inspiration from MVC architectures and the idea of components, so it serves the dual purpose of organizing code and also planting some intuitions on the students' brains that will be useful when they're properly introduced to those concepts in later courses.
 
@@ -37,7 +39,7 @@ Ignoring unrelated elements like CSS, the general folder structure for our web a
 └─ 📄other_page.html
 ```
 
-The sub-folders inside `js/` contain different specialized modules, which will be detailed in the following sections. For the sake of example, let's assume we're building a simple photo gallery, and so our back-end provides basic CRUD endpoints for photos.
+The sub-folders inside `js/` contain different specialized modules, which will be detailed in the following sections. For the sake of example, let's assume we're building a simple photo gallery, and that there is an existing back-end that provides basic CRUD endpoints for photos.
 
 ## API modules
 
@@ -59,6 +61,7 @@ The `api/` folder contains a common module, `api/common.js`, with general utilit
 The `common.js` module provides shared configuration for all other API modules, like the base URL. It also allows us to centralize shared options and headers for all requests, for example, to send things like session tokens:
 
 ```js
+"use strict";
 import { sessionManager } from "/js/utils/session.js";
 
 const BASE_URL = "/api/v1";
@@ -70,9 +73,12 @@ const requestOptions = {
 export { BASE_URL, requestOptions };
 ```
 
+In this case, session tokens are handled by `sessionManager`, a [utility module](#bonus-utility-modules).
+
 Then, the class-specific API modules provide wrapper methods for all back-end endpoints. For example, this is the `photos.js` module:
 
 ```js
+"use strict";
 import { BASE_URL, requestOptions } from "./common.js";
 
 const photosAPI = {
@@ -126,7 +132,7 @@ From our experience, this task was another hotspot for messy code. To provide a 
 - It centralizes the styling of the different domain elements, and
 - It decouples the data representation from its possible visual representations (for example, a photo can be displayed as a thumbnail inside a gallery, or as a larger element if we want to see its details).
 
-And so, without uttering the word _component_, we manage to introduce students to a basic concept of modern web design without tying ourselves down to a specific framework.
+And so, without uttering the word _component_, we managed to introduce students to a basic concept of modern web design without tying ourselves down to a specific framework.
 
 In our web apps, we again have one renderer per relevant domain class:
 
@@ -143,6 +149,7 @@ In our web apps, we again have one renderer per relevant domain class:
 The way we create these is pretty simple. We tell our students to write standard HTML to represent something until they're happy with how it looks, and then abstract away the specific details into a JS renderer. For example, here is a possible renderer for photos, which provides representations for a photo as a thumbnail or as an extended view:
 
 ```js
+"use strict";
 import { parseHTML } from "/js/utils/parseHTML.js";
 
 const photosRenderer = {
@@ -156,7 +163,7 @@ const photosRenderer = {
                             <p class="photo-desc">${photo.description}</p>
                         </div>
                     </div>`;
-        
+
         return parseHTML(html);
     },
 
@@ -165,10 +172,10 @@ const photosRenderer = {
             <h2>${photo.title}</h2>
             <h4>${photo.description}</h4>
             <p>
-                Uploaded by 
+                Uploaded by
                 <a href="view_profile.html?id=${photo.userID}">
                     @${photo.username}
-                </a> 
+                </a>
             </p>
             <img src="${photo.url}" alt="${photo.description}">
         </div>`;
@@ -180,11 +187,12 @@ const photosRenderer = {
 export { photosRenderer };
 ```
 
-Here, `parseHTML` is another [utility](#utility-modules) that we provide students with, which simply transforms an HTML string into a DOM object.
+Here, `parseHTML` is another [utility](#bonus-utility-modules) that we provide students with, which simply transforms an HTML string into a DOM object.
 
 Renderers are, of course, highly composable. For example, let's build a renderer for a gallery of photo thumbnails, `/js/renderers/gallery.js`, using a basic Bootstrap layout:
 
 ```js
+"use strict";
 import { parseHTML } from "/js/utils/parseHTML.js";
 import { photosRenderer } from "/js/renderers/photos.js";
 
@@ -227,6 +235,7 @@ Similarly to the previous ones, we create one validation module per class, which
 The validation module for photos could look like this:
 
 ```js
+"use strict";
 const photosValidator = {
 
     validateCreation: function(formData) {
@@ -259,11 +268,12 @@ By now, we have all the building blocks we need to build an actual page for our 
 To do this, we create a JS file for every HTML page in our application, with the same name. For example, let's build our `index.html`, in which we'll show a gallery with all of our pictures. The responsible for bringing this page to life (its _controller_, if you will) is `js/index.js`, which could look like this:
 
 ```js
+"use strict";
 import { photosAPI } from "/js/api/photos.js";
 import { photosValidator } from "/js/validators/photos.js";
 import { galleryRenderer } from "/js/renderers/gallery.js";
 
-function main() { 
+function main() {
     loadGallery();
 }
 
@@ -279,9 +289,10 @@ document.addEventListener("DOMContentLoaded", main);
 
 Creating and registering a `main()` function reduces friction with their pre-existing programming knowledge and, I think, helps students visualize the execution flow more clearly. At this point, the process of retrieving and displaying elements from the API becomes fairly streamlined: request the elements, renderize them, and place them in the appropriate container. Other elements can then be loaded in parallel thanks to the functions being `async`.
 
-Handling forms to create/edit elements
+The logic for handling forms also becomes remarkably similar every time: the controller registers a function to deal with the form's `submit` event, which uses the relevant validator to check for errors, and either send it via a POST/PUT request using the `api` modules, or displaying these errors to the user:
 
 ```js
+"use strict";
 import { photosAPI } from "/js/api/photos.js";
 import { alertRenderer } from "/js/renderers/alerts.js";
 
@@ -295,18 +306,12 @@ function handlePhotoSubmit(event) {
 
     let formData = new FormData(event.target);
     let errors = photosValidator.validateCreation(formData);
-    
-    let errorsDiv = document.getElementById("errors");
-    errorsDiv.innerHTML = "";
-    
+
     if (errors.length === 0) {
         await photosAPI.create(formData);
         window.location.href = "index.html";
     } else {
-        for (let errorMsg of errors) {
-            let error = alertRenderer.asError(errorMsg);
-            errorsDiv.append(error);
-        }
+        // Display `errors` in a useful way using a renderer.
     }
 }
 
@@ -314,4 +319,85 @@ document.addEventListener("DOMContentLoaded", main);
 
 ```
 
+## Closing thoughts
+
+I had a lot of fun during my four years teaching web development. It's a particularly rewarding course because students get instant visual feedback on all the work they do, and that has a huge impact in keeping their motivation high throughout the semester. I like to think that the most valuable thing that we were able to provide to them, rather than the technicalities of things like *how to make an AJAX request with JS*, was these guidelines on how to organize scalable volumes of JS code.
+
+Of course, this structure isn't flawless, and in many cases it's a bit coupled to other parts of our tech stack. I decided to share it in the hopes that it's useful to some devs or teachers out there. My hope is that, as our former students advance in their careers, they use it a starting point for even better code structures, and that we contributed to making some codebases, somewhere, a bit nicer.
+
 ## Bonus: utility modules
+
+There are a couple of extra modules that I mentioned briefly before which provide some related utilities. We included them in our project templates for students to use freely. However, I always tried to allocate some time to briefly explain why and how they work.
+
+The first one is `parseHTML.js`, which turns a string containing HTML into a DOM object:
+
+```js
+"use strict";
+
+function parseHTML(str) {
+    let tmp = document.implementation.createHTMLDocument();
+    tmp.body.innerHTML = str;
+    return tmp.body.children[0];
+}
+
+export { parseHTML };
+```
+
+This is an adaptation of [YouMightNotNeedJQuery's](https://youmightnotneedjquery.com/) replacement for `$.parseHTML()`, with the added restriction of allowing only one root node in the string.
+
+Finally, there's `sessions.js`. This is an object with a collection of utility methods for handling and storing login data, logouts, invalidating them when they expire and so on. What the `login()` method expects is tightly couple to [the tool that we use for our back-ends](https://github.com/DEAL-US/Silence), but besides that, I don't think that anything here is particularly remarkable. I'll include it in all its glory simply to make this blog post fully self-contained:
+
+```js
+"use strict";
+
+// Time in seconds during which the session token is valid
+const TOKEN_VALIDITY_TIME = 86400;
+
+const sessionManager = {
+
+    login: function (sessionToken, userData) {
+        localStorage.setItem("sessionToken", sessionToken);
+        localStorage.setItem("sessionTokenTime", new Date().getTime());
+        localStorage.setItem("loggedUserData", JSON.stringify(userData));
+    },
+
+    logout: function () {
+        localStorage.removeItem("sessionToken");
+        localStorage.removeItem("sessionTokenTime");
+        localStorage.removeItem("loggedUserData");
+    },
+
+    getToken: function () {
+        let token = localStorage.getItem("sessionToken");
+
+        // Logout if the token has expired
+        if (token !== null) {
+            let currentDate = new Date().getTime();
+            let tokenDate = localStorage.getItem("sessionTokenTime");
+            let diff = currentDate - tokenDate;
+
+            if (diff > TOKEN_VALIDITY_TIME * 1000) {
+                console.error("The session has expired, logging out.");
+                this.logout();
+                token = null;
+            }
+        }
+
+        return token;
+    },
+
+    isLogged: function () {
+        return this.getToken() !== null;
+    },
+
+    getLoggedUser: function () {
+        return JSON.parse(localStorage.getItem("loggedUserData"));
+    },
+
+    getLoggedId: function () {
+        return this.isLogged() ? this.getLoggedUser().userId : null;
+    }
+};
+
+export { sessionManager };
+```

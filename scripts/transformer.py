@@ -13,7 +13,7 @@ def process_entry(entry: RawEntry) -> ProcessedEntry:
     title, content_raw = entry.content.split("---", maxsplit=1)
 
     # Transform the content into HTML
-    html_content = markdown.markdown(content_raw.strip(), extensions=["fenced_code"])
+    html_content = markdown.markdown(content_raw.strip(), extensions=["fenced_code", "toc"])
 
     # Extract the preview, which is the content of the first <p>
     # in the processed HTML
@@ -34,6 +34,6 @@ def process_entry(entry: RawEntry) -> ProcessedEntry:
 
 def _transform_date(date: str) -> str:
     year, month, day = date.split("-")
-    month_str = ["jan", "feb", "mar", "apr", "may", "jun", 
+    month_str = ["jan", "feb", "mar", "apr", "may", "jun",
                  "jul", "aug", "sep", "oct", "nov", "dec"]
     return f"{day.lstrip('0')} {month_str[int(month) - 1]}. {year}"

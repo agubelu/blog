@@ -38,7 +38,7 @@ def make_entry(template: str, entry: ProcessedEntry) -> str:
     preview = entry.preview
 
     # Link to go back to the index
-    back_home = '<a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go to index</a>'
+    back_home = '<a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to index</a>'
 
     # Main content block
     entry_content = f"""

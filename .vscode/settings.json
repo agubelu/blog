@@ -1,9 +1,3 @@
 {
-    "liveServer.settings.root": "/out",
-    "grammarly.selectors": [
-        {
-            "language": "markdown",
-            "scheme": "file"
-        }
-    ]
+    "liveServer.settings.root": "/out"
 }
