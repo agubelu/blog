@@ -10,3 +10,8 @@ draft:
 
 clean:
 	@ rm -rf out
+
+update:
+	@ git add .
+	@ git commit -m 'Update'
+	@ git push
