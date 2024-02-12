@@ -18,11 +18,17 @@
 
     <link rel="stylesheet" href="https://borrego.dev/css/template.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/code_highlight.css">
-    <link rel="stylesheet" href="/css/fa.min.css">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/css/code_highlight.css">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/css/fa.min.css">
+
+    <noscript>
+        <link rel="stylesheet" href="/css/code_highlight.css">
+        <link rel="stylesheet" href="/css/fa.min.css">
+    </noscript>
 
     <script src="/js/darkmode.js"></script>
-    <script src="/js/highlight.min.js"></script>
+    <script defer src="/js/highlight.min.js"></script>
 </head>
 
 <body>
@@ -76,8 +82,6 @@
         </div>
 
     </div>
-
-    <script>document.addEventListener("DOMContentLoaded", hljs.highlightAll);</script>
 </body>
 
 </html>
