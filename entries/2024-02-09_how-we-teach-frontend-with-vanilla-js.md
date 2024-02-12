@@ -321,9 +321,9 @@ document.addEventListener("DOMContentLoaded", main);
 
 ## Closing thoughts
 
-I had a lot of fun during my four years teaching web development. It's a particularly rewarding course because students get instant visual feedback on all the work they do, and that has a huge impact in keeping their motivation high throughout the semester. I like to think that the most valuable thing that we were able to provide to them, rather than the technicalities of things like *how to make an AJAX request with JS*, was these guidelines on how to organize scalable volumes of JS code.
+I had a lot of fun during my four years teaching web development. It's a particularly rewarding course because students get instant visual feedback on all the work they do, and that has a huge impact in keeping their motivation high throughout the semester. I like to think that the most valuable thing we were able to provide to them, rather than the technicalities of things like *how to make an AJAX request with JS*, was these guidelines on how to organize scalable volumes of JS code.
 
-Of course, this structure isn't flawless, and in many cases it's a bit coupled to other parts of our tech stack. I decided to share it in the hopes that it's useful to some devs or teachers out there. My hope is that, as our former students advance in their careers, they use it a starting point for even better code structures, and that we contributed to making some codebases, somewhere, a bit nicer.
+Of course, this structure isn't flawless, and in many cases it's a bit coupled to other parts of our tech stack. I decided to share it in the hopes that it's useful to some devs or teachers out there. My hope is that, as our former students advance in their careers and move on to higher responsibility positions, they use it a starting point for even better code structures, and that we contributed to making some codebases, somewhere, a bit nicer.
 
 ## Bonus: utility modules
 
@@ -345,7 +345,7 @@ export { parseHTML };
 
 This is an adaptation of [YouMightNotNeedJQuery's](https://youmightnotneedjquery.com/) replacement for `$.parseHTML()`, with the added restriction of allowing only one root node in the string.
 
-Finally, there's `sessions.js`. This is an object with a collection of utility methods for handling and storing login data, logouts, invalidating them when they expire and so on. What the `login()` method expects is tightly couple to [the tool that we use for our back-ends](https://github.com/DEAL-US/Silence), but besides that, I don't think that anything here is particularly remarkable. I'll include it in all its glory simply to make this blog post fully self-contained:
+Finally, there's `sessions.js`. This is an object with a collection of utility methods for handling and storing login data, logouts, invalidating them when they expire and so on. What the `login()` method expects is tightly coupled to [the tool that we use for our back-ends](https://github.com/DEAL-US/Silence), but besides that, I don't think that anything here is particularly remarkable. I'll include it in all its glory simply to make this blog post fully self-contained:
 
 ```js
 "use strict";

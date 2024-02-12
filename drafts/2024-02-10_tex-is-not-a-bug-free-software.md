@@ -64,7 +64,7 @@ Please reach me at name_surname@domain.com
 
 Whoops! Something turned red and your email looks a bit funky. Let's see what the compiler has to say:
 
-```
+```txt
 This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex)
  restricted \write18 enabled.
 entering extended mode
@@ -100,7 +100,7 @@ Ok, sure, I'm being a bit difficult. This is the whole compiler log. But it *is*
 
 From now on, let's assume that you're using Overleaf, TeX studio or any other tool that shows you only the revelant errors:
 
-```
+```txt
 <inserted text> 
                 $
 l.4 Please reach me at name_

@@ -40,6 +40,10 @@
     --codeDeletionBg: #78191b;
 }
 
+p code {
+    font-size: .9rem;
+}
+
 pre {
     padding: 0;
     border-radius: 5px;

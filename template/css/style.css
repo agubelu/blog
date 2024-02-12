@@ -34,11 +34,6 @@
     font-style: italic;
 }
 
-.entry p {
-    text-align: justify;
-    text-justify: auto;
-}
-
 /* -------------------------------------------------------------------------- */
 /* General styles */
 
@@ -53,6 +48,11 @@
     text-align: center;
     width: 90%;
     margin-left: 5%;
+}
+
+#content p {
+    font-size: 110%;
+    line-height: 1.5;
 }
 
 .sticky {

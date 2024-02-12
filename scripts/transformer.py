@@ -21,10 +21,6 @@ def process_entry(entry: RawEntry) -> ProcessedEntry:
     match = RE_P.search(html_content)
     if match:
         preview = match.group(1)
-        if preview.endswith("."):
-            preview += ".."
-        else:
-            preview += "..."
 
     return ProcessedEntry(url=url,
                           date=_transform_date(date_raw),

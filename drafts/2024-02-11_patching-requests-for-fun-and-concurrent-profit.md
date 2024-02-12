@@ -4,7 +4,7 @@ Because life is too short to spam calls to `SSL_CTX_load_verify_locations()`.
 
 ## Reproducing the problem
 
-Let's consider the following script. It runs a bunch of concurrent requests against a URL, both with certificate verification enabled and disabled, and outputs the time it takes to do it in both cases.
+Let's consider the following script. It runs a bunch of concurrent requests against a URL using the [requests](https://requests.readthedocs.io/en/latest/) library, both with certificate verification enabled and disabled, and outputs the time it takes to do it in both cases.
 
 ```py
 from time import time
