@@ -21,15 +21,11 @@
     <script src="https://borrego.dev/js/darkmode.js"></script>
 
     <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/css/code_highlight.css">
-    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/css/fa.min.css">
 
     <noscript>
         <style>#dark-mode-container {{ display: none !important; }}</style>
         <link rel="stylesheet" href="/css/code_highlight.css">
-        <link rel="stylesheet" href="/css/fa.min.css">
     </noscript>
-
-    <script defer src="/js/highlight.min.js"></script>
 </head>
 
 <body>
@@ -61,21 +57,20 @@
                     </span>
 
                     <div id="links">
-                        <a rel="noreferrer" href="mailto:agu@borrego.dev" aria-label="Link to my email">
-                            <i class="fa fa-envelope-square" aria-hidden="true"></i>
+                        <a href="mailto:agu@borrego.dev" aria-label="Link to send me an email">
+                            <img src="/img/icons/mail.svg" class="img-flip-color" alt="Email icon">
                         </a>
 
-                        <a rel="noreferrer" href="https://github.com/agubelu" aria-label="Link to my GitHub profile">
-                            <i class="fa fa-github-square" aria-hidden="true"></i>
+                        <a href="https://github.com/agubelu" aria-label="Link to my GitHub profile">
+                            <img src="/img/icons/github.svg" class="img-flip-color" alt="GitHub logo">
                         </a>
 
-                        <a rel="noreferrer" href="https://www.linkedin.com/in/agustin-borrego/?locale=en_US"
-                            aria-label="Link to my LinkedIn profile">
-                            <i class="fa fa-lnkdi-square" aria-hidden="true"></i>
+                        <a href="https://www.linkedin.com/in/agustin-borrego/?locale=en_US" aria-label="Link to my LinkedIn profile">
+                            <img src="/img/icons/linkedin.svg" class="img-flip-color" alt="LinkedIn logo">
                         </a>
 
-                        <a rel="noreferrer" href="/rss.xml" aria-label="Link to the RSS feed for this blog">
-                            <i class="fa fa-rss-square" aria-hidden="true"></i>
+                        <a href="https://borrego.dev" aria-label="Link to my homepage">
+                            <img src="/img/icons/home.svg" class="img-flip-color" alt="Home icon">
                         </a>
                     </div>
                 </div>
@@ -83,6 +78,8 @@
         </div>
 
     </div>
+    <script src="/js/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", hljs.highlightAll);</script>
 </body>
 
 </html>

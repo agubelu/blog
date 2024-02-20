@@ -6,7 +6,6 @@
     --picture-bg: hsl(240, 6%, 92%);
     --border-color: hsl(0, 0%, 80%);
     --text: #222;
-    --header-buttons: #292929; /* De-saturate the buttons a little bit to visually match the text */
     --link: #0056b3;
 }
 
@@ -17,7 +16,6 @@
     --picture-bg: #2e2e2e;
     --border-color: hsl(0, 0%, 30%);
     --text: rgb(225, 225, 230);
-    --header-buttons: rgb(205, 205, 210);
     --link: #5ba5f5;
 }
 
@@ -107,8 +105,8 @@ hr {
     font-size: 300%;
 }
 
-#links a {
-    color: var(--header-buttons) !important;
+[data-theme="dark"] .img-flip-color {
+    filter: invert(1);
 }
 
 /* -------------------------------------------------------------------------- */
