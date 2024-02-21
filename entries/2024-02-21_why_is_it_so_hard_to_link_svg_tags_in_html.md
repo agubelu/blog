@@ -1,4 +1,4 @@
-Why is it so hard to link (and style) SVGs in HTML?
+Why is it so hard to link svg tags in HTML?
 ---
 
 The year is 2024. We have language models that can code, shitty AI-generated content everywhere, and still no flying cars. But a problem that should be trivial to solve is surprisingly annoying: why is there no easy way to link the contents of an `<svg>` tag?
