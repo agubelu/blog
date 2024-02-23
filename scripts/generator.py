@@ -24,7 +24,7 @@ def make_index(template: str, entries: List[ProcessedEntry]) -> str:
             </div>
 
             <hr>"""
-        
+
     return template.format(
         title=title,
         preview=preview,
@@ -38,19 +38,19 @@ def make_entry(template: str, entry: ProcessedEntry) -> str:
     preview = entry.preview
 
     # Link to go back to the index
-    back_home = '<a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to index</a>'
+    back_home = '<a href="/">Back to index</a>'
 
     # Main content block
     entry_content = f"""
             <div class="entry">
                 <h1 class="entry-title">{entry.title}</h1>
                 <span class="entry-date">{entry.date}</span>
-                
+
                 {entry.html_content}
             </div>
 
             <hr>"""
-        
+
     return template.format(
         title=title,
         preview=preview,
@@ -74,5 +74,5 @@ def make_rss(entries: List[ProcessedEntry]) -> str:
         fe.title(entry.title)
         fe.description(entry.preview)
         fe.link(href=f"https://blog.borrego.dev/entries/{entry.url}.html")
-    
+
     return fg.rss_str(pretty=True).decode("utf-8")
