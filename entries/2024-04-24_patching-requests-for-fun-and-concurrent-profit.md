@@ -58,7 +58,7 @@ ncalls  tottime  percall  cumtime  percall filename:lineno(function)
 60/2    0.063    0.001    0.505    0.253 {method 'read' of '_ssl._SSLSocket' objects}
 ```
 
-In the first case, a full 0.68 seconds are spent in the `load_verify_locations()` function of the `ssl` module, which configures a `SSLContext` object to use a set of root CA certificates for validation. Inside the constructor for these contexts, there is a C FFI call to OpenSSL's `SSL_CTX_load_verify_locations()` which [is known](https://github.com/python/cpython/issues/95031) to be [quite slow](https://github.com/openssl/openssl/issues/16871). This happens once per request (hence the `30` on the left).
+In the first case, a full 0.68 seconds are spent in the `load_verify_locations()` function of the `ssl` module, which configures a `SSLContext` object to use a set of root CA certificates for validation. This is done via a C FFI call to OpenSSL's `SSL_CTX_load_verify_locations()` which [is known](https://github.com/python/cpython/issues/95031) to be [quite slow](https://github.com/openssl/openssl/issues/16871). This happens once per request (hence the `30` on the left).
 
 Taken at face value, 0.68 seconds isn't that big of a deal, but please note that this is **longer than the network wait for the requests themselves**. In scenarios with a higher concurrency, we have also observed some global blocking going on, either because each FFI call locks up the GIL or because of some thread safety mechanisms in OpenSSL itself. In either case, the performance hit gets worse and worse as you scale the number of concurrent requests up. We also think that this is more or less pronounced depending on internal changes between OpenSSL's versions, hence the variability between environments.
 
