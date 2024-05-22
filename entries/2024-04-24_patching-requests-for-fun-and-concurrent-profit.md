@@ -101,4 +101,4 @@ A small caveat happens when `verify` isn't a boolean, but rather a string indica
 
 ---
 
-NB: Most of the content of this post is taken from the [corresponding pull request](https://github.com/psf/requests/pull/6667) that I submitted to Requests. As of publishing this, it doesn't seem to be in a very active state, and to the best of my knowledge the issue still persists.
+Update: The corresponding [pull request](https://github.com/psf/requests/pull/6667) has since been accepted by the maintainers and merged, and the changes have been published in version [2.32.0](https://github.com/psf/requests/blob/main/HISTORY.md#2320-2024-05-20) of Requests.
