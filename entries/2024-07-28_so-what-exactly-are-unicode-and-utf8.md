@@ -103,7 +103,7 @@ Hi 👋
 
 </center>
 
-Note how the first 3 characters (`Hi `) take one byte each, while the waving emoji takes 4 bytes. That's UTF-8's variable-length encoding in action.
+Note how the first 3 characters (`Hi␣`) take one byte each, while the waving emoji takes 4 bytes. That's UTF-8's variable-length encoding in action.
 
 And that's all for today! I hope that, if anything, this made you aware of the huge standardization and coordination effort it takes so that we can display the 💩 emoji in all its glory, regardless of device and language.
 
