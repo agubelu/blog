@@ -3,6 +3,7 @@ import re
 from scripts.types import RawEntry, ProcessedEntry
 
 RE_P = re.compile("<p>(.*?)</p>", re.DOTALL)
+RE_LINK = re.compile("<a.*?>(.*?)</a>", re.DOTALL)
 
 def process_entry(entry: RawEntry) -> ProcessedEntry:
     # Get the date and the URL from the filename
@@ -13,14 +14,14 @@ def process_entry(entry: RawEntry) -> ProcessedEntry:
     title, content_raw = entry.content.split("---", maxsplit=1)
 
     # Transform the content into HTML
-    html_content = markdown.markdown(content_raw.strip(), extensions=["fenced_code", "toc"])
+    html_content = markdown.markdown(content_raw.strip(), extensions=["fenced_code", "toc", "footnotes"])
 
     # Extract the preview, which is the content of the first <p>
     # in the processed HTML
     preview = ""
     match = RE_P.search(html_content)
     if match:
-        preview = match.group(1)
+        preview = RE_LINK.sub(r'\1', match.group(1))
 
     return ProcessedEntry(url=url,
                           date=_transform_date(date_raw),
