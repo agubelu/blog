@@ -72,7 +72,7 @@ The smallest power of 2 bits able to hold the maximum Unicode value is 32 bits (
 
 Such a representation is called UTF-32. Here, the 32 means that the smallest amount of space that it will use to store any Unicode value is 32 bits. But that is also the *maximum* amount of space required to store any Unicode value, and so UTF-32 is a **fixed-length** representation, with all characters taking exactly 32 bits.
 
-This binary representation is simple, but not very efficient. Remember when I mentioned that the first 128 Unicode values map to the same characters as ASCII? Using a 4-byte representation for ASCII-only text is wildly inefficient, as the first 3 bytes will always be `0x00 0x00 0x00`, a 75% waste of space.
+This binary representation is simple, but not very efficient. Remember when I mentioned that the first 128 Unicode values map to the same characters as ASCII? Using a 4-byte representation for ASCII-only text is wildly inefficient, as the first 3 bytes of every character will always be `0x00 0x00 0x00`, a 75% waste of space.
 
 This is where **variable-length** representations come to the rescue. Broadly speaking, UTF-16 uses 2 bytes when the Unicode value fits in 16 bits[^5], and 4 bytes otherwise. And UTF-8 can use either 1, 2, or 4 bytes per value, using only as much space as needed. Since ASCII characters have very low Unicode values, they comfortably fit in 8 bits, and so their UTF-8 binary representation is exactly the same as in early-day ASCII. Isn't that cool?
 
@@ -105,13 +105,13 @@ Hi 👋
 
 Note how the first 3 characters (`Hi `) take one byte each, while the waving emoji takes 4 bytes. That's UTF-8's variable-length encoding in action.
 
-And this will be all for today! I hope that, if anything, this made you aware of the huge standardization and coordination effort it takes so that we can display the 💩 emoji in all its glory, regardless of device and language.
+And that's all for today! I hope that, if anything, this made you aware of the huge standardization and coordination effort it takes so that we can display the 💩 emoji in all its glory, regardless of device and language.
 
 [^1]: Extended ASCII isn't a specific encoding of it's own. It's the name commonly given to the whole family of language-specific, ASCII-based encodings that showed up afterwards.
 
-[^2]: Yes, this number is oddly specific and not a power of 2. It has to do with the way the Unicode space is [internally organized](https://en.wikipedia.org/wiki/Plane_(Unicode)).
+[^2]: Yes, this number is oddly specific and not a power of 2. It has to do with the way the Unicode space is [internally organized](https://en.wikipedia.org/wiki/Plane_(Unicode)). As of writing this post, Unicode defines 149,813 characters, which accounts for only ~13% of the available space, including [a bunch of characters with unknown meaning](https://www.youtube.com/watch?v=tfk3dgpAals).
 
-[^3]: As of writing this post, Unicode defines 149,813 characters, which accounts for only ~13% of the available space, including [a bunch of characters with unknown meaning](https://www.youtube.com/watch?v=tfk3dgpAals).
+[^3]: I am aware that the proper Unicode term is *code point* and not *character*. But leveraging the common conception of *character* gets the points across, and I don't want to engage on a philosophical discussion on what a *character* even is.
 
 [^4]: By the way, this is the reason why Rust's `char` is 32 bits wide, so that it can hold any possible Unicode value.
 
