@@ -107,7 +107,7 @@ Note how the first 3 characters (`Hi␣`) take one byte each, while the waving e
 
 And that's all for today! I hope that, if anything, this made you aware of the huge standardization and coordination effort it takes so that we can display the 💩 emoji in all its glory, regardless of device and language.
 
-[^1]: Extended ASCII isn't a specific encoding of it's own. It's the name commonly given to the whole family of language-specific, ASCII-based encodings that showed up afterwards.
+[^1]: Extended ASCII isn't a specific encoding of its own. It's the name commonly given to the whole family of language-specific, ASCII-based encodings that showed up afterwards.
 
 [^2]: Yes, this number is oddly specific and not a power of 2. It has to do with the way the Unicode space is [internally organized](https://en.wikipedia.org/wiki/Plane_(Unicode)). As of writing this post, Unicode defines 149,813 characters, which accounts for only ~13% of the available space, including [a bunch of characters with unknown meaning](https://www.youtube.com/watch?v=tfk3dgpAals).
 
