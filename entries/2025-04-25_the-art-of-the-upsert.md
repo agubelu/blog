@@ -13,7 +13,7 @@ Using upserts has some obvious benefits: first, they simplify your logic *a lot*
 
 ## Upserts in Postgres
 
-Let's see how upserts work with a specific example. Imagine a personal content manager for a blog, where a user writes and updates their posts. Each post has an internal autoincremental[^1] ID, a unique slug[^2], some text content, and the timestamps for when it was created and last updated.
+Let's see how upserts work with a specific example. Imagine a personal content manager for a blog, where a user writes and updates their posts. Each post has an internal autoincremental[^1] ID, a unique <span>slug[^2]</span>, some text content, and the timestamps for when it was created and last updated.
 
 The corresponding table definition in Postgres would look like this:
 
