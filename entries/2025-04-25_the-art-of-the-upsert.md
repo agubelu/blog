@@ -56,7 +56,7 @@ This is sufficient for a basic upsert, but this query has some shortcomings that
 
 When we tried to insert new values, we explicitly listed only the columns `slug` and `content`. In order to complete the insertion attempt, Postgres automatically calculates the default values for all other columns. In the case of `id`, since we intended it to be an auto-incremental value, the default is `nextval('blog_post_id_seq')`.
 
-This means that, for every upsert, the sequence we're using for our primary key is advanced, regardless of whether or not an insertion actually occurs. If there is a conflict and an insertion is performed instead, the value we obtained from the sequence is discarded. You can test this by inserting a new value, updating it a bunch of times, and then inserting a different one. You will see that the ID assigned to the new one has a gap equal to the number of updates performed.
+This means that, for every upsert, the sequence we're using for our primary key is advanced, regardless of whether or not an insertion actually occurs. If there is a conflict and an update is performed instead, the value we obtained from the sequence is discarded. You can test this by inserting a new value, updating it a bunch of times, and then inserting a different one. You will see that the ID assigned to the new one has a gap equal to the number of updates performed.
 
 This is not ideal, and can end up quickly exhausting an `INT` (32 bit) sequence if there's a high volume of upserts. The solution is to explictly provide a value for the `id`, only advancing the sequence when needed:
 
