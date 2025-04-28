@@ -7,7 +7,7 @@ Upserts are some of the most convenient database operations, and yet many people
 
 I'm sure you have dealt with this situation before: you have a piece of data with a unique identifier, which may or may not exist in the database. If it doesn't exist, you want to insert it as a new entry. If it does exist, you want to update the existing record with the latest information.
 
-The word "upsert" is short for update-or-insert, and they refer to an operation that covers this exact use case. Upserts provide a convenient way to either insert a row or update an existing one. This is done atomically, in a single statement, thus guaranteeing either outcome.
+The word "upsert" is short for update-or-insert, and it refers to an operation that covers this exact use case. Upserts provide a convenient way to either insert a row or update an existing one. This is done atomically, in a single statement, thus guaranteeing either outcome.
 
 Using upserts has some obvious benefits: first, they simplify your logic *a lot*, because you can use the same code path for both cases instead of having to treat them separately. But their atomicity also means you don't have to deal with an entire class of concurrency-related problems, especially if the database in question has a high volume of possibly-overlapping writes.
 
