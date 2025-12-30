@@ -87,6 +87,10 @@ sup~sup :before {
     content: ', '
 }
 
+li {
+    line-height: 1.5;
+}
+
 /* -------------------------------------------------------------------------- */
 /* Header styles */
 
@@ -119,6 +123,12 @@ sup~sup :before {
 
 [data-theme="dark"] .img-flip-color {
     filter: invert(1);
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 /* -------------------------------------------------------------------------- */
