@@ -1,6 +1,6 @@
 Answering 'how full is the gym?' with reverse engineering and web crawling
 ---
-How to intercept and inspecting an app's traffic using an Android emulator and mitmproxy.
+How to intercept and inspect an app's traffic using an Android emulator and mitmproxy.
 
 ---
 
